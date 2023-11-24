@@ -1,12 +1,23 @@
+require('dotenv').config()
+
 const mongoose = require('mongoose');
 (express = require('express')), (app = express());
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(
-  'mongodb+srv://newuser:123@cluster0.f9d6o.gcp.mongodb.net/Activitiess'
-);
+user = process.env.USERID
+pw = process.env.PW
 
+uri = 'mongodb+srv://' + user + ':' + pw + '@cluster0.f9d6o.gcp.mongodb.net/Tasks'
+
+console.log(user)
+console.log(pw)
+console.log(uri)
+
+mongoose.connect(
+  uri
+);
+ 
 // Create a Schema object
 const activitySchema = new mongoose.Schema({
   activity: { type: String, required: true },
@@ -17,7 +28,7 @@ const Activitymodel = mongoose.model('Activity', activitySchema);
 
 app.get('/', (req, res) => {
   const task1 = new Activitymodel({
-    activity: 'activity 111',
+    activity: 'activity class nov 23 - 2',
   });
 
   Activitymodel.insertMany([task1]);
